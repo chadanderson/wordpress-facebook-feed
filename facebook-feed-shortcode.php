@@ -1,13 +1,22 @@
 <?php
 
-/*
-Add Facebook feed shortcode to WordPress
+/**
+*
+* Facebook feed shortcode
+*
+* Add shortcode functionality to include the feed of a Facebook page on your website
+*
+*
+* @param array $atts Array of shortcode attributes
+* @return string
+*
 */
 function get_facebook_updates( $atts, $content = null ) {
 
 	extract( shortcode_atts( array( 
 		'facebook_access_token' => '',
-		'facebook_page_name' => ''
+		'facebook_page_name' => '',
+		'post_count' => ''
 		), $atts ) );
 
 	// Extract the page ID from the Facebook Page
@@ -20,13 +29,13 @@ function get_facebook_updates( $atts, $content = null ) {
 
 	// Interpret data with JSON
 	$facebook_data = json_decode($facebook_page_content);
-	$html = '<h2 class="facebook-feed-title">' . __( 'Facebook Feed', 'facebook-feed-shortcode' ) . '</h2>';
+	$html = '<h2 class="facebook-feed-title">Facebook Feed</h2>';
 	$html .= '<ul class="facebook-feed">';
 
 	// Loop through data for each feed item
 	$i = 1;
 	foreach ($facebook_data->data as $news ) {
-		if($i < 4) { 
+		if($i < $post_count+1) { 
 			$StatusID = explode("_", $news->id);?>
 			<?php if (!empty($news->message))
 			{ 
