@@ -15,12 +15,12 @@ function get_facebook_updates( $atts, $content = null ) {
 
 	extract( shortcode_atts( array( 
 		'facebook_access_token' => '',
-		'facebook_page_name' => '',
+		'facebook_page_username' => '',
 		'post_count' => ''
 		), $atts ) );
 
-	// Extract the page ID from the Facebook Page
-	$facebook_page_data = file_get_contents( 'https://graph.facebook.com/' . $facebook_page_name );
+	// Extract the page ID from the Facebook Page 
+	$facebook_page_data = file_get_contents( 'https://graph.facebook.com/' . $facebook_page_username );
 	$facebook_page_data = json_decode( $facebook_page_data );
 	$facebook_page_id = $facebook_page_data->id;
 
@@ -41,13 +41,13 @@ function get_facebook_updates( $atts, $content = null ) {
 			{ 
 				$content = substr($news->message, 0, 160); 
 				$html .= '<li>'.$content . '...<br />';
-				$html .= '<a href="http://www.facebook.com/' . $facebook_page_name . '">View the full entry</a></li>';
+				$html .= '<a href="http://www.facebook.com/' . $facebook_page_username . '">View the full entry</a></li>';
 			}
 		}
 		$i++;
 	}
 	$html .= '</ul>';
-	$html .= '<p><button class="facebook-feed-button"><a href="http://www.facebook.com/' . $facebook_page_name . '">Connect on Facebook</a></button></p>';
+	$html .= '<p><button class="facebook-feed-button"><a href="http://www.facebook.com/' . $facebook_page_username . '">Connect on Facebook</a></button></p>';
 	return $html;
 }
 
