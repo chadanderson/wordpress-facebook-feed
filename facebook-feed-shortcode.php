@@ -16,7 +16,7 @@ function get_facebook_updates( $atts ) {
 		'facebook_access_token' => '',
 		'facebook_page_username' => '',
 		'post_count' => ''
-		), $atts ) );
+	), $atts ) );
 
 	// Extract the page ID from the Facebook Page 
 	$facebook_page_data = file_get_contents( 'https://graph.facebook.com/' . $facebook_page_username );
