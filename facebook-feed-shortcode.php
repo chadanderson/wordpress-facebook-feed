@@ -1,5 +1,4 @@
 <?php
-
 /**
 *
 * Facebook feed shortcode
@@ -11,7 +10,7 @@
 * @return string
 *
 */
-function get_facebook_updates( $atts, $content = null ) {
+function get_facebook_updates( $atts ) {
 
 	extract( shortcode_atts( array( 
 		'facebook_access_token' => '',
@@ -36,11 +35,9 @@ function get_facebook_updates( $atts, $content = null ) {
 	$i = 1;
 	foreach ($facebook_data->data as $news ) {
 		if($i < $post_count+1) { 
-			$StatusID = explode("_", $news->id);?>
-			<?php if (!empty($news->message))
-			{ 
+			if (!empty($news->message)) { 
 				$content = substr($news->message, 0, 160); 
-				$html .= '<li>'.$content . '...<br />';
+				$html .= '<li>'. $content . '...<br />';
 				$html .= '<a href="http://www.facebook.com/' . $facebook_page_username . '">View the full entry</a></li>';
 			}
 		}
@@ -53,4 +50,4 @@ function get_facebook_updates( $atts, $content = null ) {
 
 add_shortcode('facebook_feed', 'get_facebook_updates');
 
-?> 
+?>
