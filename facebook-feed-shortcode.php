@@ -44,7 +44,7 @@ function get_facebook_updates( $atts ) {
 		$i++;
 	}
 	$html .= '</ul>';
-	$html .= '<p><button class="facebook-feed-button"><a href="http://www.facebook.com/' . $facebook_page_username . '">Connect on Facebook</a></button></p>';
+	$html .= '<p><span class="facebook-feed-button"><a href="http://www.facebook.com/' . $facebook_page_username . '">Connect on Facebook</a></span></p>';
 	return $html;
 }
 
